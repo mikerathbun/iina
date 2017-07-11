@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaPlayer
 import MASPreferences
 
 @NSApplicationMain
@@ -77,9 +78,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSColorPanel.shared().showsAlpha = true
 
     // other
-    if #available(OSX 10.12.2, *) {
+    if #available(macOS 10.12.2, *) {
       NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
       NSWindow.allowsAutomaticWindowTabbing = false
+
+      let remoteCommand = MPRemoteCommandCenter.shared()
+      remoteCommand.playCommand.addTarget(handler: PlayerCore.handlePlayCommand(_:))
+      remoteCommand.pauseCommand.addTarget(handler: PlayerCore.handlePauseCommand(_:))
+      remoteCommand.togglePlayPauseCommand.addTarget(handler: PlayerCore.handleTogglePlayPauseCommand(_:))
+      remoteCommand.stopCommand.addTarget(handler: PlayerCore.handleStopCommand(_:))
+      remoteCommand.nextTrackCommand.addTarget(handler: PlayerCore.handleNextTrackCommand(_:))
+      remoteCommand.previousTrackCommand.addTarget(handler: PlayerCore.handlePreviousTrackCommand(_:))
     }
 
     // pending open request
