@@ -46,6 +46,8 @@ class PrefSubViewController: NSViewController {
 
     scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 460))
     
+    
+    // MARK: MikeR Here is the default value
     let defaultEncoding = Preference.string(for: .defaultEncoding)
     for encoding in AppData.encodings {
       defaultEncodingList.addItem(withTitle: encoding.title)
