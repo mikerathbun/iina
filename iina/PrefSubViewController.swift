@@ -111,7 +111,7 @@ class PrefSubViewController: NSViewController {
   }
   
   @IBAction func changeDefaultEncoding(_ sender: NSPopUpButton) {
-    Preference.set(sender.selectedItem?.representedObject!, for: .defaultEncoding)
+    Preference.set(sender.selectedItem?.representedObject! ?? "auto", for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
   }
